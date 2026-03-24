@@ -10,13 +10,16 @@ public static class RegistryHelper
         return Registry.LocalMachine.OpenSubKey(registryPath, RegistryKeyPermissionCheck.ReadWriteSubTree) ?? throw new Exception($"Can't find registry path, looking at: {registryPath}");
     }
 
-    public static DscMode ReadDscMode(this RegistryKey registryKey)
+    extension(RegistryKey registryKey)
     {
-        return (DscMode)(registryKey.GetValue("DPMstDscDisable") as int? ?? -1);
-    }
+        public DscMode ReadDscMode()
+        {
+            return (DscMode)(registryKey.GetValue("DPMstDscDisable") as int? ?? -1);
+        }
 
-    public static void SetDscMode(this RegistryKey registryKey, DscMode mode)
-    {
-        registryKey.SetValue("DPMstDscDisable", (int)mode);
+        public void SetDscMode(DscMode mode)
+        {
+            registryKey.SetValue("DPMstDscDisable", (int)mode);
+        }
     }
 }

@@ -11,7 +11,7 @@ public static class User32 {
     private static extern bool EnumDisplaySettings(string lpszDeviceName, int iModeNum, ref Devmode lpDevMode);
 
     [DllImport("powrprof.dll", SetLastError = true)]
-    private static extern uint CallNtPowerInformation(int InformationLevel, IntPtr lpInputBuffer, uint nInputBufferSize, IntPtr lpOutputBuffer, uint nOutputBufferSize);
+    private static extern uint CallNtPowerInformation(int informationLevel, IntPtr lpInputBuffer, uint nInputBufferSize, IntPtr lpOutputBuffer, uint nOutputBufferSize);
 
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto)]
     private struct DisplayDevice
