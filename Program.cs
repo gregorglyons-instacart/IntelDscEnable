@@ -1,10 +1,12 @@
 ﻿using IntelDSCEnable;
 
-var classGuid = Guid.Parse(WmiHelper.GetSignedDriverPropertyValue("Intel(R) Iris(R) Xe Graphics", "ClassGuid"));
+var deviceId = WmiHelper.GetSignedDriverPropertyValue("Intel(R) Iris(R) Xe Graphics", "DeviceID");
 
-var driverKeys = RegistryHelper.GetDriverKey(classGuid);
+var driverKeys = RegistryHelper.GetDriverKey(deviceId);
 
 var originalMode = driverKeys.ReadDscMode();
+
+Console.WriteLine(driverKeys.Name);
 
 if (originalMode != DscMode.Enabled)
 {

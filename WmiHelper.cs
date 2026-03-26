@@ -6,7 +6,7 @@ public static class WmiHelper
 {
     public static string GetSignedDriverPropertyValue(string deviceName, string propertyName)
     {
-        var mo = QueryMo($"SELECT ClassGuid FROM Win32_PnPSignedDriver WHERE DeviceName = '{deviceName}'").FirstOrDefault() ?? throw new Exception($"Can't find device with name: {deviceName}");
+        var mo = QueryMo($"SELECT {propertyName} FROM Win32_PnPSignedDriver WHERE DeviceName = '{deviceName}'").FirstOrDefault() ?? throw new Exception($"Can't find device with name: {deviceName}");
         return mo.GetManagementPropertyValue(propertyName) ?? throw new Exception($"Device found, but {propertyName} property is missing");
     }
     
